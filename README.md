@@ -28,3 +28,8 @@ In multi-robot exploration, we need a merging algorithm which can efficiently me
 ![](https://github.com/phoenixrider12/multivolta_mapping/blob/main/rsc/map_merge.gif)
 <br>
 Map Merging
+
+# Dynamic Environment Changes
+Ground robots are very commonly used in warehouses and factories where the environment is never static and it keeps changing. Hence, we want to create a system which can dynamically change the global map whenever there is any change in the environment.
+<br><br>
+For this purpose, we are creating an **Object Detection and Map Update** pipeline. The object detection module will constantly keep checking the position of all major objects in the environment and whenever it encounters any change in position of any object, it will notify the map update module. The map update module will get the initial and final position of that object and will make changes to both the positions in map. It will clear the initial position of that object and will publish its new location as a lethal obstacle so that it can get reflected in our map.
