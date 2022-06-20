@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<launch>
+<arg name="intel_D435i_camera" default="false"/>
+<arg name="orbbec_astra_pro_camera" default="false"/>
+<arg name="hokuyo_ust10lx_lidar" default="false"/>
+<arg name="rplidar_a3" default="true"/>
+<arg name="use_teleop" default="true"/>
+<arg name="wit_imu" default="false"/>
+<arg name="um7_imu" default="false"/>
+<arg name="hwt905_ros" default="false"/>
+
+
+  <arg name="namesp" default="volta1"/>
+  <group ns="$(arg namesp)">
+  <param name="tf_prefix" value="$(arg namesp)"/>
+
+        <node name="volta_hardware_node" pkg="volta_hardware" type="volta_hardware_node">
+        </node>
+        <node name="serial_node" pkg="volta_hardware" type="serial_node">
+        </node>
+
+        <arg name="model" default="$(find multivolta_exploration)/urdf/volta2.xacro"/>
+        <param name="robot_description" command="$(find xacro)/xacro --inorder $(arg model) rplidar_a3_enabled:=$(arg rplidar_a3)  hokuyo_ust_10lx_enabled:=$(arg hokuyo_ust10lx_lidar) intel_d435i_enabled:=$(arg intel_D435i_camera) orbbec_astra_pro_enabled:=$(arg orbbec_astra_pro_camera)"/>
+
+	<node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+        <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+
+        <!-- Wit IMU Driver -->
+        <group if="$(arg wit_imu)">
+            <node pkg="wit_imu_driver" type="wit_imu_driver" name="wit_imu_driver">
+                <param name="device" value="/dev/serial/by-id/usb-1a86_USB_Serial-if00-port0"/>
+                <param name="frame_id" value="/imu"/>
+                <remap from="data_raw" to="imu"/>
+                <remap from="mag" to="imu/mag"/>
+            </node>
+        </group>
+
+        <!-- UM7 IMU Driver -->
+        <group ns="um7" if="$(arg um7_imu)">
+            <node pkg="um7" type="um7_driver" name="imu_driver">
+                <param name="port" value="/dev/ttyUSB1"/> <!-- Change to by-id -->
+                <param name="mag_updates" value="false"/>
+                <param name="tf_ned_to_enu" value="false"/>
+                <param name="frame_id" value="imu"/>
+                <remap from="/um7/imu/data" to="/imu" />
+            </node>
+        </group>
+
+        <!-- HWT905 IMU Driver -->
+       	<group if="$(arg hwt905_ros)">
+    		<node pkg="hwt905_ros" type="hwt905_ros_node" name="hwt905_ros_node" output="screen" >
+		        <param name="uart_port" type="string" value="/dev/ttyUSB1" />
+		        <param name="baud_rate" type="int" value="115200" />
+		        <param name="frame_id" type="string" value="imu" />
+     		</node>
+     	</group>
+
+        <!-- Node for Odometry computation -->
+        <node name="odompublisher" pkg="multivolta_exploration" type="odometry_publisher2.py" output="screen"/>
+        <!-- <include file="$(find volta_localization)/launch/localization.launch"/> -->
+
+    </group>
+
+<include file="$(find multivolta_exploration)/launch/control2.launch" />
+
+</launch>

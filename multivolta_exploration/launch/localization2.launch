@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<launch>
+  <arg name="namesp" default="volta1"/>
+  <group ns="$(arg namesp)">
+  <param name="tf_prefix" value="$(arg namesp)"/>
+
+    <rosparam command="load" file="$(find multivolta_exploration)/config/localization2.yaml" />
+    
+    <node pkg="robot_localization" type="ekf_localization_node" name="ekf_se_odom" clear_params="true" output="screen">
+        <remap from="odometry/filtered" to="odometry/filtered"/>
+    </node>
+    
+  </group>
+</launch>
+
