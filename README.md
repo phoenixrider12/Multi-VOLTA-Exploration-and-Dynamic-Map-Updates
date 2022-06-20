@@ -24,3 +24,7 @@ RRT Exploration
 
 ## Map Merging
 In multi-robot exploration, we need a merging algorithm which can efficiently merge the individual maps of each robot and produce a global map. For this purpose, a feature matching algorithm is used which detects overlapping features in individual maps and combines them  without knowing the initial position of any robot. More details can be found [here](http://wiki.ros.org/multirobot_map_merge)
+<br><br>
+![](https://github.com/phoenixrider12/multivolta_mapping/blob/main/rsc/map_merge.gif)
+<br>
+Map Merging
