@@ -16,7 +16,7 @@
 
     <node pkg="twist_mux" type="twist_mux" name="twist_mux" output="screen">
         <remap from="cmd_vel_out" to="cmd_vel" />
-        <rosparam command="load" file="$(find multivolta_exploration)/config/twist_mux.yaml" />
+        <rosparam command="load" file="$(find volta_control)/config/twist_mux.yaml" />
     </node>
   </group>
 </launch>
