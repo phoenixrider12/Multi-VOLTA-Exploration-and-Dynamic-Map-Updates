@@ -30,7 +30,6 @@ In multi-robot exploration, we need a merging algorithm which can efficiently me
 
 ![map_merge](https://user-images.githubusercontent.com/76533398/175873785-af5f86c0-0f01-4982-a2ae-c57ba5286568.gif)
 
-<br>
 Map Merging
 
 ## Demonstration on Volta Robots
