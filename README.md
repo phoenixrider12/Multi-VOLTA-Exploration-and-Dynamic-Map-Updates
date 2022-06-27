@@ -4,12 +4,12 @@ In this project, we are trying to develop a Multi-Robot Exploration pipeline tha
 # Exploration Pipeline
 Exploration is always preferred while mapping because the robots can autonomously generate a map without any human effort. The classical way of exploration is to get frontier points on edges of generated occupancy grid and forwarding those points as goal to the robot so that it can traverse to the point and explore that area. There are several open-source ROS packages available for this approach, like [explore_lite](http://wiki.ros.org/explore_lite) and [frontier exploration](http://wiki.ros.org/frontier_exploration).
 
-![](https://github.com/phoenixrider12/multivolta_mapping/blob/main/rsc/explore_lite.gif)
-<br>
+![explore_lite](https://user-images.githubusercontent.com/76533398/175874997-17a7976f-c3da-4063-a754-0b2d23e513fe.gif)
+
 Explore Lite
-<br><br>
-![](https://github.com/phoenixrider12/multivolta_mapping/blob/main/rsc/frontier_exploration.gif)
-<br>
+
+![frontier_exploration](https://user-images.githubusercontent.com/76533398/175874970-eed29ea8-4866-4c5c-8d2e-ff991d1a3b5a.gif)
+
 Frontier Exploration
 
 In our approach, we are using **RRT (Rapidly Exploring Random Trees) Exploration**. Here, modified RRT algorithm is used for detecting frontier points, which has proven to be much faster than standard exploration. In this algorithm, we run two different ROS nodes for exploration:
@@ -19,13 +19,17 @@ In our approach, we are using **RRT (Rapidly Exploring Random Trees) Exploration
 This algorithm runs until the loop closure condition in global map is not satisfied. Here, we assume that the surface of the environment always forms a closed loop and the algorithm stops once it can’t find any open frontiers in the current map, denoting that all the traversable parts of the terrain are mapped, and no more global frontiers are found.
 More details about this ROS package can be found on http://wiki.ros.org/rrt_exploration.
 <br><br>
-<img src = "https://github.com/phoenixrider12/multivolta_mapping/blob/main/rsc/rrt_exploration.gif">
+
+![rrt_exploration](https://user-images.githubusercontent.com/76533398/175874679-873ce59c-9f50-43f5-90ab-d7fa762a03ee.gif)
+
 RRT Exploration
 
 ## Map Merging
 In multi-robot exploration, we need a merging algorithm which can efficiently merge the individual maps of each robot and produce a global map. For this purpose, a feature matching algorithm is used which detects overlapping features in individual maps and combines them  without knowing the initial position of any robot. More details can be found [here](http://wiki.ros.org/multirobot_map_merge)
 <br><br>
-![](https://github.com/phoenixrider12/multivolta_mapping/blob/main/rsc/map_merge.gif)
+
+![map_merge](https://user-images.githubusercontent.com/76533398/175873785-af5f86c0-0f01-4982-a2ae-c57ba5286568.gif)
+
 <br>
 Map Merging
 
