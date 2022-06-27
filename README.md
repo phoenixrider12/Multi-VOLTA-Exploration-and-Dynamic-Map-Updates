@@ -29,6 +29,13 @@ In multi-robot exploration, we need a merging algorithm which can efficiently me
 <br>
 Map Merging
 
+## Demonstration on Volta Robots
+
+
+https://user-images.githubusercontent.com/76533398/175872786-a48d55e6-5500-4827-b06c-3d64f1a718c8.mp4
+
+
+
 # Dynamic Environment Changes
 Ground robots are very commonly used in warehouses and factories where the environment is never static and it keeps changing. Hence, we want to create a system which can dynamically change the global map whenever there is any change in the environment.
 <br><br>
