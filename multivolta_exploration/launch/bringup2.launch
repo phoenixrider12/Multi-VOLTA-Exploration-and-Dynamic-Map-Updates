@@ -61,6 +61,8 @@
 
     </group>
 
-<include file="$(find multivolta_exploration)/launch/control2.launch" />
+<include file="$(find multivolta_exploration)/launch/control2.launch">
+<arg name="namesp" value="$(arg namesp)"/>
+</include>
 
 </launch>

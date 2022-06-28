@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <launch>
+
+  <arg name="keyboard" default="false" />
   <arg name="namesp" default="volta1"/>
   <group ns="$(arg namesp)">
   <param name="tf_prefix" value="$(arg namesp)"/>
-
-    <arg name="keyboard" default="false" />
 
     <rosparam command="load" file="$(find volta_teleoperator)/config/joy.yaml" unless="$(arg keyboard)" />
 

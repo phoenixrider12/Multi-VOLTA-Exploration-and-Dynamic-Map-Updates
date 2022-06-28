@@ -1,0 +1,26 @@
+<launch>
+
+<arg name="ns" value="volta1"/>
+
+<include file="$(find multivolta_exploration)/launch/bringup2.launch">
+<arg name="namesp" value="$(arg ns)"/>
+</include>
+
+<include file="$(find multivolta_exploration)/launch/sensors2.launch">
+<arg name="namesp" value="$(arg ns)"/>
+</include>
+
+<include file="$(find multivolta_exploration)/launch/teleoperator2.launch">
+<arg name="namesp" value="$(arg ns)"/>
+<arg name="$(arg namesp)/keyboard" value="false"/>
+</include>
+
+<include file="$(find multivolta_exploration)/launch/gmapping.launch">
+<arg name="namesp" value="$(arg ns)"/>
+</include>
+
+<include file="$(find multivolta_exploration)/launch/move_base.launch">
+<arg name="namesp" value="$(arg ns)"/>
+</include>
+
+</launch>
