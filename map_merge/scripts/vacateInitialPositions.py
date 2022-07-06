@@ -50,7 +50,7 @@ def vacate_node():
             copiedMapData.data = tuple(dataList)
             copiedMapData.header.stamp = rospy.Time.now()
             pub.publish(copiedMapData)
-	    break
+        break
 
 if __name__ == "__main__":
     try:
