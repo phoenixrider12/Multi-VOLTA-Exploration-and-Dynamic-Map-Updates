@@ -37,4 +37,6 @@ We assume that your VOLTA robots already have [this](https://github.com/botsync/
   ```
 - In your rviz, you have to select five points in the specified order as shown below to start exploration.
 
-![rrt_rviz](https://user-images.githubusercontent.com/76533398/177487250-f9ff0f30-343c-4875-8f4a-549e7f5f1ea0.png)
+<p align="center" width="100%">
+    <img width="50%" src="https://user-images.githubusercontent.com/76533398/177487250-f9ff0f30-343c-4875-8f4a-549e7f5f1ea0.png">
+</p>
