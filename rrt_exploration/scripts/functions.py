@@ -66,6 +66,7 @@ class robot:
         robot.goal.target_pose.pose.position.x = point[0]
         robot.goal.target_pose.pose.position.y = point[1]
         robot.goal.target_pose.pose.orientation.w = 1.0
+	print('robot: %s  x: %f y: %f' %(self.name, point[0],point[1]))
         self.client.send_goal(robot.goal)
         self.assigned_point = array(point)
 
@@ -81,7 +82,9 @@ class robot:
         robot.start.pose.position.y = start[1]
         robot.end.pose.position.x = end[0]
         robot.end.pose.position.y = end[1]
-        start = self.listener.transformPose(self.name+'/map', robot.start)
+        robot.start.header.stamp = rospy.Time.now()
+        robot.end.header.stamp = rospy.Time.now()
+	start = self.listener.transformPose(self.name+'/map', robot.start)
         end = self.listener.transformPose(self.name+'/map', robot.end)
         plan = self.make_plan(start=start, goal=end, tolerance=0.0)
         return plan.plan.poses
@@ -208,7 +211,7 @@ def gridValue(mapData, Xp):
     index = (floor((Xp[1]-Xstarty)/resolution)*width) + \
         (floor((Xp[0]-Xstartx)/resolution))
 
-    if int(index) < len(Data):
+    if 0<= int(index) < len(Data):
         return Data[int(index)]
     else:
         return 100
