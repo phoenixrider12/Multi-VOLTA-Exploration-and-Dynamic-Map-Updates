@@ -23,3 +23,18 @@ We assume that your VOLTA robots already have [this](https://github.com/botsync/
   roslaunch multirobot_map_merge map_merge.launch
   ```
 - Now you can use joysticks to teleoperate your robot. If in case you want to use keyboard instead of joystick, set the keyboard argument to True in `volta.launch` file.
+
+
+## Multi-Robot Exploration
+
+- For running exploration, uncomment the `move_base.launch` file from `volta.launch` so that move_base node also starts working.
+  ```
+  roslaunch multivolta_exploration volta.launch
+  ```
+- Launch exploration. Default exploration file is for 2 robots, if you are using more robots, you can modify it accordingly.
+  ```
+  roslaunch rrt_exploration two_voltas.launch
+  ```
+- In your rviz, you have to select five points as shown below to start exploration.
+
+![rrt_rviz](https://user-images.githubusercontent.com/76533398/177487250-f9ff0f30-343c-4875-8f4a-549e7f5f1ea0.png)
