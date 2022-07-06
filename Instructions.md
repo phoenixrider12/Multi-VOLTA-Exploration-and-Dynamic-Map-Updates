@@ -18,7 +18,7 @@ We assume that your VOLTA robots already have [this](https://github.com/botsync/
   ```
   roslaunch multivolta_exploration volta.launch
   ```
-- After launching this file, VOLTA's Bringup, Sensors and Gmapping will be started. Now you have to start map merger node.
+- After launching this file, VOLTA's Bringup, Sensors and Gmapping will be started. Now you have to start map merger node. Before that, set the correct initial poses in `map_merge/launch/map_merge.launch`. (You can set one robot as origin and measure others' relative pose.)
   ```
   roslaunch multirobot_map_merge map_merge.launch
   ```
