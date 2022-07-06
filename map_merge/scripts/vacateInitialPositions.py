@@ -34,7 +34,7 @@ def vacate_node():
             volta1x = 0
             volta1y = 0
             volta2x = 0
-            volta2y = 4.8
+            volta2y = 0
 
             volta1x_pixel = int(abs(volta1x - ox)/res)
             volta1y_pixel = int(abs(volta1y - oy)/res)

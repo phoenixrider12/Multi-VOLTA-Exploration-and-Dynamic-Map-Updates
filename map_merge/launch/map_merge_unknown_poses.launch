@@ -16,4 +16,6 @@
 <node pkg="tf" type="static_transform_publisher" name="map_to_volta1" args="0 0 0 0 0 0 map volta1/map 100" />
 <node pkg="tf" type="static_transform_publisher" name="map_to_volta2" args="0 0 0 0 0 0 map volta2/map 100" />
 
+<node type="rviz" name="rviz" pkg="rviz" args="-d $(find multirobot_map_merge)/rviz/map_merge.rviz" />
+
 </launch>

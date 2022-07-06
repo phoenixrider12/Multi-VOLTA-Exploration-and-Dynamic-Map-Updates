@@ -40,6 +40,9 @@
 
   <node pkg="tf" type="static_transform_publisher" name="world_to_$(arg first_volta)_tf_broadcaster"  args="$(arg first_volta_x_pos) $(arg first_volta_y_pos) 0 0 0 0 /map /$(arg first_volta)/map 100"/>
   <node pkg="tf" type="static_transform_publisher" name="world_to_$(arg second_volta)_tf_broadcaster" args="$(arg second_volta_x_pos) $(arg second_volta_y_pos) 0 0 0 0 /map /$(arg second_volta)/map 100"/>
+
+  <node type="rviz" name="rviz" pkg="rviz" args="-d $(find multirobot_map_merge)/rviz/map_merge.rviz" />
+
 </launch>
 
 
