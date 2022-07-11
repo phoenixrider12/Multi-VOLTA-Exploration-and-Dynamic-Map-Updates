@@ -61,8 +61,11 @@ We assume that your VOLTA robots already have [this](https://github.com/botsync/
   roslaunch volta_navigation navigation.launch
   ```
   (You may need to change the map file defined in navigation launch file if you are using a different map)
-- Launch Objectron node
+- Launch Objectron node and you will see global costmap getting updated with obstacles (both marking and clearing).
   ```
   rosrun map_update main.py
   ```
-Now, when you will start giving goals to robot, you will see global costmap getting updated with obstacles (both marking and clearing).
+- If you want to update your static map also with obstacles, run the following:
+  ```
+  rosrun map_update map_update.py
+  ```
