@@ -40,8 +40,12 @@ https://user-images.githubusercontent.com/76533398/175872786-a48d55e6-5500-4827-
 ### To install and run this package, follow [this](https://github.com/phoenixrider12/multivolta_mapping/blob/main/Instructions.md) 
 
 # Dynamic Environment Changes
-Ground robots are very commonly used in warehouses and factories where the environment is never static and it keeps changing. Hence, we want to create a system which can dynamically change the global map whenever there is any change in the environment.
+Ground robots are very commonly used in warehouses and factories where the environment is never static and it keeps changing. Hence, we want to create a system which can dynamically change the global costmap whenever there is any change in the environment.
 <br><br>
 For this purpose, we are creating an **Object Detection and Map Update** pipeline.
-- The object detection is a 3D Object Detection module will constantly keeps checking the position of all major objects in the environment. We have used 3D object detection because for map update, we also need an estimate of the size and dimensions of the object so that we can properly inflate it in the map, and 2D object detection can't provide us that because it returns a 2D bounding box, whereas 3D object detection returns a 3D bounding box.
-- Whenever it encounters any change in position of any object, it will notify the map update module. The map update module will get the initial and final position of that object and an estimate about its dimensions, and will make changes to both the positions in map. It will clear the initial position of that object and will publish its new location as a lethal obstacle so that it can get reflected in our map.
+<!-- - The object detection is a 3D Object Detection module will constantly keeps checking the position of all major objects in the environment. We have used 3D object detection because for map update, we also need an estimate of the size and dimensions of the object so that we can properly inflate it in the map, and 2D object detection can't provide us that because it returns a 2D bounding box, whereas 3D object detection returns a 3D bounding box.
+- Whenever it encounters any change in position of any object, it will notify the map update module. The map update module will get the initial and final position of that object and an estimate about its dimensions, and will make changes to both the positions in map. It will clear the initial position of that object and will publish its new location as a lethal obstacle so that it can get reflected in our map. -->
+
+## 3D Object Detection
+
+Here we are using 3D Object Detection instead of standard 2D object detection because for accurately updating costmap, we need object's position as well as an estimate of its dimensions in the real world, and, 2D object detection can't provide us that information because it returns a 2D bounding box, whereas 3D object detection can provide that information because it returns a 3D bounding box in camera'a view frame.
