@@ -1,16 +1,21 @@
 # Task
 In this project, we are trying to develop a Multi-Robot Mapping pipeline that can be used for manual/autonomous mapping of unknown terrains with multiple robots without any prior information about the environment. Also, once the map is prepared, we are trying to incorporate dynamic environment changes in our generated occupancy grid from knowledge gained from camera sensors.
 
-# Exploration Pipeline
+# Manual Multi-Robot Mapping
+
+For manual multi-robot mapping, we are using standard LIDAR based SLAM Gmapping for individual robot to prepare individual maps and then merging them to produce a global map. For merging, a feature matching algorithm is used which detects overlapping features in individual maps and combines them  with/without knowing the initial position of any robot. More details can be found [here](http://wiki.ros.org/multirobot_map_merge).
+<br><br>
+
+![map_merge](https://user-images.githubusercontent.com/76533398/175873785-af5f86c0-0f01-4982-a2ae-c57ba5286568.gif)
+
+Map Merging
+
+## Demonstration on Volta Robots
+
+https://user-images.githubusercontent.com/76533398/175872786-a48d55e6-5500-4827-b06c-3d64f1a718c8.mp4
+
+# Multi-Robot Exploration
 Exploration is always preferred while mapping because the robots can autonomously generate a map without any human effort. The classical way of exploration is to get frontier points on edges of generated occupancy grid and forwarding those points as goal to the robot so that it can traverse to the point and explore that area. There are several open-source ROS packages available for this approach, like [explore_lite](http://wiki.ros.org/explore_lite) and [frontier exploration](http://wiki.ros.org/frontier_exploration).
-
-![explore_lite](https://user-images.githubusercontent.com/76533398/175874997-17a7976f-c3da-4063-a754-0b2d23e513fe.gif)
-
-Explore Lite
-
-![frontier_exploration](https://user-images.githubusercontent.com/76533398/175874970-eed29ea8-4866-4c5c-8d2e-ff991d1a3b5a.gif)
-
-Frontier Exploration
 
 In our approach, we are using **RRT (Rapidly Exploring Random Trees) Exploration**. Here, modified RRT algorithm is used for detecting frontier points, which has proven to be much faster than standard exploration. In this algorithm, we run two different ROS nodes for exploration:
  - Global Frontier Detector: Find frontier points in global occupancy grid
@@ -24,22 +29,7 @@ More details about this ROS package can be found on http://wiki.ros.org/rrt_expl
 
 RRT Exploration
 
-## Map Merging
-In multi-robot exploration, we need a merging algorithm which can efficiently merge the individual maps of each robot and produce a global map. For this purpose, a feature matching algorithm is used which detects overlapping features in individual maps and combines them  with/without knowing the initial position of any robot. More details can be found [here](http://wiki.ros.org/multirobot_map_merge)
-<br><br>
-
-![map_merge](https://user-images.githubusercontent.com/76533398/175873785-af5f86c0-0f01-4982-a2ae-c57ba5286568.gif)
-
-Map Merging
-
-## Demonstration on Volta Robots
-
-
-https://user-images.githubusercontent.com/76533398/175872786-a48d55e6-5500-4827-b06c-3d64f1a718c8.mp4
-
-### To install and run this package, follow [this](https://github.com/phoenixrider12/multivolta_mapping/blob/main/Instructions.md) 
-
-# Dynamic Environment Changes
+# Dynamic Map Updates
 Ground robots are very commonly used in warehouses and factories where the environment is never static and it keeps changing. Hence, we want to create a system which can dynamically change the global costmap whenever there is any change in the environment.
 <br><br>
 For this purpose, we are creating an **Object Detection and Map Update** pipeline.
@@ -65,3 +55,5 @@ https://user-images.githubusercontent.com/76533398/178238455-f191a896-f6a8-403a-
 Here is a demo of VOLTA's navigation test while performing map updates:
 
 https://user-images.githubusercontent.com/76533398/178238942-88896295-8299-405e-a5d8-0db93965d7fe.mp4
+
+### To install and run this package, follow these [instructions](https://github.com/phoenixrider12/multivolta_mapping/blob/main/Instructions.md).
