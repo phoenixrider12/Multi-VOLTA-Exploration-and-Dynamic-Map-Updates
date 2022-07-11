@@ -47,3 +47,16 @@ We assume that your VOLTA robots already have [this](https://github.com/botsync/
 - Before running dynamic map updates, do following two things:
   - Install Mediapipe's Objectron module from [here](https://google.github.io/mediapipe/getting_started/python.html).
   - Add `{name: simple_layer, type: "simple_layer_namespace::SimpleLayer"}` under plugins in `volta_navigation/config/costmap_global.yaml`.
+- Launch VOLTA's Bringup
+  ```
+  roslaunch volta_base bringup.launch
+  ```
+- Launch VOLTA's Sensors
+  ```
+  roslaunch volta_base sensors.launch
+  ```
+- Launch Navigation
+  ```
+  roslaunch volta_navigation navigation.launch
+  ```
+  (You may need to change the map file defined in navigation launch file if you are using a different map)
