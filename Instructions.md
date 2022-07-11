@@ -27,7 +27,7 @@ We assume that your VOLTA robots already have [this](https://github.com/botsync/
 
 ## Multi-Robot Exploration
 
-- For running exploration, uncomment the `move_base.launch` file from `volta.launch` so that move_base node also starts working.
+- For running exploration, uncomment the `move_base.launch` and `amcl.launch` files from `volta.launch` so that move_base and amcl nodes also starts working.
   ```
   roslaunch multivolta_exploration volta.launch
   ```
