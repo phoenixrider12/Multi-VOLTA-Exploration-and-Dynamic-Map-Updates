@@ -53,4 +53,8 @@ Here we are using 3D Object Detection instead of standard 2D object detection be
 For our purpose, we are using Mediapipe's [Objectron](https://google.github.io/mediapipe/solutions/objectron.html#camera-coordinate) module. It is an opensource module which can detect objects like chairs, shoes, coffee mugs and cameras.
 ![objectron](https://user-images.githubusercontent.com/76533398/178235387-539dfcab-b17a-4c49-bdf2-74c6f62dc29e.png)
 
-After getting coordinates of all 9 points in camera view frame, we transform them into real world using [Look-At Transformation](https://www.scratchapixel.com/lessons/mathematics-physics-for-computer-graphics/lookat-function) technique. Since we can't transform a point to its actual real world coordinate but instead to a 3D line in real world, we compute multiple such lines using multiple cameras and then use gradient descent optimization algorithm to extract the actual coordinates of each point.
+After getting coordinates of all 9 points in camera view frame, we transform them into real world using [Look-At Transformation](https://www.scratchapixel.com/lessons/mathematics-physics-for-computer-graphics/lookat-function) technique. Since we can't transform a point to its actual real world coordinate but instead to a 3D line in real world, we compute multiple such lines using multiple cameras and then use gradient descent optimization algorithm to extract the actual coordinates of each point. Then from the real world coordinates of all 9 points, we compute its center's coordinates and its dimensions.
+
+## Map Update
+
+For performing map updates, we have added a new layer to the global costmap as a plugin. That plugin receives data from objectron and updates the cost of object's new location as well as its previous location.
