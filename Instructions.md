@@ -40,3 +40,10 @@ We assume that your VOLTA robots already have [this](https://github.com/botsync/
 <p align="center" width="100%">
     <img width="50%" src="https://user-images.githubusercontent.com/76533398/177487250-f9ff0f30-343c-4875-8f4a-549e7f5f1ea0.png">
 </p>
+
+
+## Dynamic Map Updates
+
+- Before running dynamic map updates, do following two things:
+  - Install Mediapipe's Objectron module from [here](https://google.github.io/mediapipe/getting_started/python.html).
+  - Add `{name: simple_layer, type: "simple_layer_namespace::SimpleLayer"}` under plugins in `volta_navigation/config/costmap_global.yaml`.
