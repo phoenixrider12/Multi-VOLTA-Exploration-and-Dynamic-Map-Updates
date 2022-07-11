@@ -57,4 +57,7 @@ After getting coordinates of all 9 points in camera view frame, we transform the
 
 ## Map Update
 
-For performing map updates, we have added a new layer to the global costmap as a plugin. That plugin receives data from objectron and updates the cost of object's new location as well as its previous location.
+For performing map updates, we have added a new layer to the global costmap as a plugin. That plugin receives data from objectron and updates the cost of object's new location as well as its previous location. Here is a demo video:
+
+https://user-images.githubusercontent.com/76533398/178238455-f191a896-f6a8-403a-8fae-6bc10677354f.mp4
+
