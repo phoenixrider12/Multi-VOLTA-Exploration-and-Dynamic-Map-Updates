@@ -3,7 +3,7 @@
   <arg name="namesp" default="volta1"/>
   <arg name="odom_topic" default="/$(arg namesp)/odom" />
   <arg name="move_forward_only" default="false"/>
-
+  <arg name="map_frame" default="$(arg namesp)/map"/>
   <!-- move_base -->
   <group ns="$(arg namesp)">
     <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
@@ -26,11 +26,15 @@
       <param name="local_costmap/robot_base_frame" value="$(arg namesp)/base_link"/>
       <param name="local_costmap/obstacles_laser/laser/sensor_frame" value="$(arg namesp)/lidar"/>
       <param name="local_costmap/obstacles_laser/laser/topic" value="/$(arg namesp)/scan"/>
-    
+
       <!--<param name="DWAPlannerROS/odom_topic" value="/$(arg namesp)/odom"/>
       <param name="DWAPlannerROS/map_frame" value="$(arg namesp)/map"/>-->
 
       <remap from="odom" to="$(arg odom_topic)"/>
+    </node>
+
+    <node name="map_server" pkg="map_server" type="map_server" args="$(find volta_navigation)/maps/newmap.yaml">
+        <param name="frame_id" value="$(arg map_frame)"/>
     </node>
   </group>
 </launch>

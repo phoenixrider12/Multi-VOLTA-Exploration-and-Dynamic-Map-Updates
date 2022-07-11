@@ -19,8 +19,12 @@
 <arg name="namesp" value="$(arg ns)"/>
 </include>
 
-<include file="$(find multivolta_exploration)/launch/move_base.launch">
+<!-- <include file="$(find multivolta_exploration)/launch/move_base.launch">
 <arg name="namesp" value="$(arg ns)"/>
 </include>
+
+<include file="$(find multivolta_exploration)/launch/amcl.launch">
+<arg name="namesp" value="$(arg ns)"/>
+</include> -->
 
 </launch>

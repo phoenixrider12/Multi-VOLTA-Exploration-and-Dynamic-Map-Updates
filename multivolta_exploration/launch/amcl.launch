@@ -1,0 +1,33 @@
+<launch>
+
+    <arg name="namesp" default="volta1"/>
+    <arg name="scan_topic" default="/$(arg namesp)/scan" />
+    <arg name="amcl_use_map_topic" default="true"/>
+    <arg name="odom_frame" default="$(arg namesp)/odom"/>
+    <arg name="base_frame" default="$(arg namesp)/base_link"/>
+    <arg name="map_frame" default="$(arg namesp)/map"/>
+    <arg name="amcl_tf_broadcast" default="true"/>
+    <arg name="amcl_init_pose_x" default="0.0"/>
+    <arg name="amcl_init_pose_y" default="0.0"/>
+    <arg name="amcl_init_pose_yaw" default="0.0"/>
+    <arg name="map_file" default="$(find volta_navigation)/maps/newmap.yaml"/>
+
+    <group ns="$(arg namesp)">
+
+    <node pkg="amcl" type="amcl" name="amcl">
+        <rosparam file="$(find volta_navigation)/config/amcl.yaml" command="load"/>
+        <param name="use_map_topic" value="$(arg amcl_use_map_topic)"/>
+        <param name="global_frame_id" value="$(arg map_frame)"/>
+        <param name="odom_frame_id" value="$(arg odom_frame)"/>
+        <param name="base_frame_id" value="$(arg base_frame)"/>
+        <param name="initial_pose_x" value="$(arg amcl_init_pose_x)"/>
+        <param name="initial_pose_y" value="$(arg amcl_init_pose_y)"/>
+        <param name="initial_pose_a" value="$(arg amcl_init_pose_yaw)"/>
+        <param name="tf_broadcast" value="$(arg amcl_tf_broadcast)"/>
+        <remap from="scan" to="$(arg scan_topic)"/>
+    </node>
+
+    </group>
+
+</launch>
+
