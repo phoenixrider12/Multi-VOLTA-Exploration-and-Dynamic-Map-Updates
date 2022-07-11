@@ -65,3 +65,4 @@ We assume that your VOLTA robots already have [this](https://github.com/botsync/
   ```
   rosrun map_update main.py
   ```
+Now, when you will start giving goals to robot, you will see global costmap getting updated with obstacles (both marking and clearing).
