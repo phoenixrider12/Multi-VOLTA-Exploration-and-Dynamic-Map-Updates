@@ -48,4 +48,8 @@ For this purpose, we are creating an **Object Detection and Map Update** pipelin
 
 ## 3D Object Detection
 
-Here we are using 3D Object Detection instead of standard 2D object detection because for accurately updating costmap, we need object's position as well as an estimate of its dimensions in the real world, and, 2D object detection can't provide us that information because it returns a 2D bounding box, whereas 3D object detection can provide that information because it returns a 3D bounding box in camera'a view frame.
+Here we are using 3D Object Detection instead of standard 2D object detection because for accurately updating costmap, we need object's position as well as an estimate of its dimensions in the real world, and 2D object detection can't provide us that information because it returns a 2D bounding box, whereas 3D object detection can provide that information because it returns a 3D bounding box in camera'a view frame.
+
+For our purpose, we are using Mediapipe's [Objectron](https://google.github.io/mediapipe/solutions/objectron.html#camera-coordinate) module. It is an opensource module which can detect objects like chairs, shoes, coffee mugs and cameras.
+![objectron](https://user-images.githubusercontent.com/76533398/178235387-539dfcab-b17a-4c49-bdf2-74c6f62dc29e.png)
+
