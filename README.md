@@ -10,7 +10,7 @@ For manual multi-robot mapping, we are using standard LIDAR based SLAM Gmapping 
 
 Map Merging
 
-## Demonstration on Volta Robots
+## Demonstration on VOLTA Robots
 
 https://user-images.githubusercontent.com/76533398/175872786-a48d55e6-5500-4827-b06c-3d64f1a718c8.mp4
 
