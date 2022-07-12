@@ -54,6 +54,8 @@ https://user-images.githubusercontent.com/76533398/178238455-f191a896-f6a8-403a-
 <br>
 Here is a demo of VOLTA's navigation test while performing map updates:
 
+https://user-images.githubusercontent.com/76533398/178238942-88896295-8299-405e-a5d8-0db93965d7fe.mp4
+
 # Package Description
 
 - multivolta_exploration: Containes all the launch files for launching VOLTA with namespaces for easy bringup of VOLTA with any custom namespace.
@@ -61,7 +63,5 @@ Here is a demo of VOLTA's navigation test while performing map updates:
 - rrt_exploration: Modified RRT Exploration for VOLTA robot for multi-robot exploration.
 - simple_layers: Package containing plugin for updating global costmap.
 - map_update: Package containing scripts for running objectron and map updates.
-
-https://user-images.githubusercontent.com/76533398/178238942-88896295-8299-405e-a5d8-0db93965d7fe.mp4
 
 ### To install and run this package, follow these [instructions](https://github.com/phoenixrider12/multivolta_mapping/blob/main/Instructions.md).
