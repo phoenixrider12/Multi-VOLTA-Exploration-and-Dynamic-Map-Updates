@@ -54,6 +54,9 @@ void SimpleLayer::reconfigureCB(costmap_2d::GenericPluginConfig &config, uint32_
 }
 
 float distance = 0;
+int updated = 1;
+ros::Time start_time;
+ros::Time time;
 
 void SimpleLayer::updateCosts(costmap_2d::Costmap2D& master_grid, int min_i, int min_j, int max_i, int max_j)
 {
@@ -67,35 +70,50 @@ void SimpleLayer::updateCosts(costmap_2d::Costmap2D& master_grid, int min_i, int
       distance = sqrt(pow(newX - oldX, 2) + pow(newY - oldY, 2));
       ROS_INFO("Distance: %f", distance);
 
-      if (distance > 1)
+      if (distance > 0.5)
       {
-         ROS_INFO("1");
-         for (float i = (newX - newLength/2); i < (newX + newLength/2); i += 0.001)
-          {
-              for (float j = (newY - newWidth/2); j < (newY + newWidth/2); j += 0.001)
-              {
-                  if(master_grid.worldToMap(i, j, mx, my))
-                  {
-                      master_grid.setCost(mx, my, LETHAL_OBSTACLE);
-                  }
-              }
-          }
+         if (updated == 1)
+         {
+             start_time = ros::Time::now();
+         }
+         time = ros::Time::now();
 
-          for (float i = (oldX - oldLength/2); i < (oldX + oldLength/2); i += 0.001)
-          {
-              for (float j = (oldY - oldWidth/2); j < (oldY + oldWidth/2); j += 0.001)
-              {
-                  if(master_grid.worldToMap(i, j, mx, my))
-                  {
-                      master_grid.setCost(mx, my, FREE_SPACE);
-                  }
-              }
-          }
+         if (time - start_time > ros::Duration(60))
+         {
+            for (float i = (newX - newLength/2); i < (newX + newLength/2); i += 0.001)
+            {
+                for (float j = (newY - newWidth/2); j < (newY + newWidth/2); j += 0.001)
+                {
+                    if(master_grid.worldToMap(i, j, mx, my))
+                    {
+                        master_grid.setCost(mx, my, LETHAL_OBSTACLE);
+                    }
+                }
+            }
 
-          oldX = newX;
-          oldY = newY;
-          oldLength = newLength;
-          oldWidth = newWidth;
+            for (float i = (oldX - oldLength/2); i < (oldX + oldLength/2); i += 0.001)
+            {
+                for (float j = (oldY - oldWidth/2); j < (oldY + oldWidth/2); j += 0.001)
+                {
+                    if(master_grid.worldToMap(i, j, mx, my))
+                    {
+                        master_grid.setCost(mx, my, FREE_SPACE);
+                    }
+                }
+            }
+
+            oldX = newX;
+            oldY = newY;
+            oldLength = newLength;
+            oldWidth = newWidth;
+	        updated = 1;
+         }
+
+         else
+         {
+             time = ros::Time::now();
+             updated = 0;
+         }
       }
 
       else
