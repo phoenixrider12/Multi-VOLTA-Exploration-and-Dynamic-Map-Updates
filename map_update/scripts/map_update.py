@@ -52,6 +52,7 @@ def node():
     rospy.Subscriber('/objectron', Float32MultiArray, coordinatesCallback)
     rospy.Subscriber('/map', OccupancyGrid, mapCallback)
     pub = rospy.Publisher('/map', OccupancyGrid, queue_size=10)
+    updated = True
 
     while not rospy.is_shutdown():
         if len(mapData.data) > 0:
@@ -65,31 +66,40 @@ def node():
             # rospy.sleep(5)
 
             if dist > 0.5:
-                print('Distance: ',dist)
-                pxold = int(abs(oldX - ox)/res)
-                pyold = int(abs(oldY - oy)/res)
-                pxnew = int(abs(newX - ox)/res)
-                pynew = int(abs(newY - oy)/res)
+                if updated:
+                    start_time = rospy.Time.now()
+                time = rospy.Time.now()
+                if time - start_time > rospy.Duration(60):
+                    print(dist)
+                    pxold = int(abs(oldX - ox)/res)
+                    pyold = int(abs(oldY - oy)/res)
+                    pxnew = int(abs(newX - ox)/res)
+                    pynew = int(abs(newY - oy)/res)
 
-                pOldLength = int(oldLength/res)
-                pOldWidth = int(oldWidth/res)
-                pNewLength = int(newLength/res)
-                pNewWidth = int(newWidth/res)
+                    pOldLength = int(oldLength/res)
+                    pOldWidth = int(oldWidth/res)
+                    pNewLength = int(newLength/res)
+                    pNewWidth = int(newWidth/res)
 
-                copiedMapData = mapData
-                dataList = list(copiedMapData.data)
+                    copiedMapData = mapData
+                    dataList = list(copiedMapData.data)
 
-                insertObstacle(dataList, pxnew, pynew, pNewLength, pNewWidth, mapWidth, mapHeight)
-                removeObstacle(dataList, pxold, pyold, pOldLength, pOldWidth, mapWidth, mapHeight)
-                copiedMapData.data = tuple(dataList)
-                copiedMapData.header.stamp = rospy.Time.now()
-                pub.publish(copiedMapData)
-                print("Obstacle updated")
+                    # print(pxold, pyold, pxnew, pynew, pOldLength, pOldWidth, pNewLength, pNewWidth)
+                    insertObstacle(dataList, pxnew, pynew, pNewLength, pNewWidth, mapWidth, mapHeight)
+                    removeObstacle(dataList, pxold, pyold, pOldLength, pOldWidth, mapWidth, mapHeight)
+                    copiedMapData.data = tuple(dataList)
+                    copiedMapData.header.stamp = rospy.Time.now()
+                    pub.publish(copiedMapData)
+                    print("Obstacle updated")
 
-                oldX = newX                
-                oldY = newY
-                oldLength = newLength
-                oldWidth = newWidth
+                    oldX = newX                
+                    oldY = newY
+                    oldLength = newLength
+                    oldWidth = newWidth
+                    updated = True
+                else:
+                    time = rospy.Time.now()
+                    updated = False
             
 if __name__ == '__main__':
     try:
