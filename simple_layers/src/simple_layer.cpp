@@ -67,7 +67,7 @@ void SimpleLayer::updateCosts(costmap_2d::Costmap2D& master_grid, int min_i, int
       distance = sqrt(pow(newX - oldX, 2) + pow(newY - oldY, 2));
       ROS_INFO("Distance: %f", distance);
 
-      if (distance > 1)
+      if (distance > 0.5)
       {
          ROS_INFO("1");
          for (float i = (newX - newLength/2); i < (newX + newLength/2); i += 0.001)
