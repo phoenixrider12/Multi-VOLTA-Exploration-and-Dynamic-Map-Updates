@@ -10,7 +10,7 @@ For manual multi-robot mapping, we are using standard LIDAR based SLAM Gmapping 
 
 Map Merging
 
-## Demonstration on Volta Robots
+## Demonstration on VOLTA Robots
 
 https://user-images.githubusercontent.com/76533398/175872786-a48d55e6-5500-4827-b06c-3d64f1a718c8.mp4
 
@@ -55,5 +55,13 @@ https://user-images.githubusercontent.com/76533398/178238455-f191a896-f6a8-403a-
 Here is a demo of VOLTA's navigation test while performing map updates:
 
 https://user-images.githubusercontent.com/76533398/178238942-88896295-8299-405e-a5d8-0db93965d7fe.mp4
+
+# Package Description
+
+- multivolta_exploration: Containes all the launch files for launching VOLTA with namespaces for easy bringup of VOLTA with any custom namespace.
+- map_merge: Map merging package which merges all individual maps and produce combined map.
+- rrt_exploration: Modified RRT Exploration for VOLTA robot for multi-robot exploration.
+- simple_layers: Package containing plugin for updating global costmap.
+- map_update: Package containing scripts for running objectron and map updates.
 
 ### To install and run this package, follow these [instructions](https://github.com/phoenixrider12/multivolta_mapping/blob/main/Instructions.md).
